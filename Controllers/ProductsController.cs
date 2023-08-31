@@ -19,22 +19,57 @@ namespace ProductsAPI.Controllers
         }
 
         [HttpGet]
+        [Route("/products")]
         public async Task<ActionResult> GetProducts()
         {
-            return Ok(_context.Products.ToListAsync());
+            return Ok(await _context.Products.ToListAsync());
         }
         //criação do metodo construtivo post
         [HttpPost]
+        [Route("/products")]
         public async Task<ActionResult> CreateProduct(Product product)
         {
            await _context.Products.AddAsync(product);
-
            await _context.SaveChangesAsync();
 
             return Ok(product);
-
         }
-        
-        
+
+        [HttpPut]
+        [Route("/products")]
+        public async Task<ActionResult> UpdateProduct(Product product)
+        {
+            var dbProduct = await _context.Products.FindAsync(product.Id);
+
+            if (dbProduct == null)
+                return NotFound();
+
+            dbProduct.Name = product.Name;
+            dbProduct.Price = product.Price;
+            dbProduct.Category = product.Category;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(product);
+        }
+
+        [HttpDelete]
+        [Route("/products")]
+        public async Task<ActionResult> UpdateProduct(Guid id)
+        {
+            var dbProduct = await _context.Products.FindAsync(id);
+
+            if (dbProduct == null)
+                return NotFound();
+
+            _context.Products.Remove(dbProduct);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
+
+
     }
 }
