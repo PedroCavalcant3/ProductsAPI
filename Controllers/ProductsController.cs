@@ -21,13 +21,14 @@ namespace ProductsAPI.Controllers
         [HttpGet]
         public async Task<ActionResult> GetProducts()
         {
-            return Ok(_context.products.ToListAsync());
+            return Ok(_context.Products.ToListAsync());
         }
         //criação do metodo construtivo post
         [HttpPost]
         public async Task<ActionResult> CreateProduct(Product product)
         {
-           await _context.products.AddAsync(product);
+           await _context.Products.AddAsync(product);
+
            await _context.SaveChangesAsync();
 
             return Ok(product);

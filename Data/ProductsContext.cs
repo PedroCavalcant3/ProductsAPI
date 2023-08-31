@@ -5,7 +5,7 @@ namespace ProductsAPI.Data
 {
     public class ProductsContext : DbContext
     {
-        protected ProductsContext(DbContextOptions<ProductsContext> options)
+        public ProductsContext(DbContextOptions<ProductsContext> options)
             :base(options){ }
 
         //mapear o uso do SqlServer junto ao AppSettings da aplicação
