@@ -5,11 +5,11 @@
         public Guid Id { get; set; }
 
         public string Name { get; set; }
-        
+
         public decimal Price { get; set; }
 
         public ProductCategory Category { get; set; }
-   
+
     }
 
     public enum ProductCategory
@@ -20,3 +20,5 @@
         Durables = 3,
         Digital = 4
     }
+
+}
